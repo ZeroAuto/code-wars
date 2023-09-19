@@ -6,7 +6,7 @@
 #     while i<=n: res+=[i]
 #     return res
 
-def create_array(n):
+def create_array_orig(n):
     result = []
     i = 1
     while i <= n:
@@ -14,3 +14,8 @@ def create_array(n):
         i += 1
     return result
     
+def create_array(n):
+    return [i for i in range(1,n+1)]
+
+def create_array_list(n):
+    return list(range(1,n + 1))
