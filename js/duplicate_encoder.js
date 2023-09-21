@@ -1,4 +1,4 @@
-const duplicateEncodeOriginal = word => {
+const duplicateEncode = word => {
   const charObj = {};
   let result = '';
   word.split('').forEach(l => {
@@ -20,11 +20,11 @@ const duplicateEncodeOriginal = word => {
   return result;
 };
 
-const duplicateEncodeIndexOf= word => {
+const duplicateEncodeIndexOf = word => {
   return word
     .toLowerCase()
     .split('')
-    .map( function (a, i, w) {
+    .map(function(a, i, w) {
       return w.indexOf(a) == w.lastIndexOf(a) ? '(' : ')'
     })
     .join('');
