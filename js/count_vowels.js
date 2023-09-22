@@ -19,6 +19,7 @@ const getCountSplit = (str) => {
 };
 
 const getCountReplace = (str) => {
+  // use regex to sub vowels for empty string, thereby reducing the length
   return str.replace(/[^aeiou]/gi, '').length;
 };
 
