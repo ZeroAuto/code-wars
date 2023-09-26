@@ -1,7 +1,6 @@
 # https://www.codewars.com/kata/5679aa472b8f57fb8c000047
 
 def find_even_index(arr):
-
     # it looks like enumerate could be used like and each_with_index
     # or forEach in Ruby and Javascript respectively
     for i, x in enumerate(arr):
