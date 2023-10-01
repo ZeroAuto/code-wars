@@ -1,7 +1,7 @@
 const getCount = (str) => {
   const vowels = ['a', 'e', 'i', 'o', 'u'];
   let count = 0;
-  for (s of str) {
+  for (let s of str) {
     if (vowels.includes(s)) {
       count ++;
     }
@@ -9,6 +9,20 @@ const getCount = (str) => {
 
   return count;
 };
+
+const doAThing = n => {
+  for (let i = 1; i <= n; i++) {
+    if (i % 15 === 0) {
+      console.log('fizzbuzz');
+    } else if (i % 3 === 0) {
+      console.log('fizz');
+    } else if (i % 5 === 0) {
+      console.log('buzz');
+    } else {
+      console.log(i);
+    }
+  }
+}
 
 const getCountMatch = (str) => {
   return (str.match(/[aeiou]/ig)||[]).length;
@@ -23,4 +37,5 @@ const getCountReplace = (str) => {
   return str.replace(/[^aeiou]/gi, '').length;
 };
 
-console.log(getCountSplit('blahblah'));
+// console.log(getCountSplit('blahblah'));
+console.log(doAThing(20));
