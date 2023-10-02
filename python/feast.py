@@ -1,5 +1,9 @@
+def feast_orig(beast, dish):
+    return beast[0] == dish[0] and beast[-1] == dish[-1]
+
+
 def feast(beast, dish):
-    return beast[0] == dish[0] and beast[len(beast) - 1] == dish[len(dish) - 1]
+    return beast.startswith(dish[0]) and beast.endswith(dish[-1])
 
 
 print(feast('great blue heron', 'garlic naan'))  # True
