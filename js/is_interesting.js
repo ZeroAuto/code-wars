@@ -1,81 +1,83 @@
 const isInteresting = (number, awesomePhrases) => {
   let result = 0;
   const range = [number, number + 1, number + 2];
-  const calculateResult = n => {
+  if (number > 97) {
+    const calculateResult = n => {
+      if (result != 2) {
+        result = n === range[0] ? 2 : 1;
+      }
+    };
+
+    if (awesomePhrases.length > 0) {
+      awesomePhrases.forEach(phrase => {
+        if (range.includes(phrase)) {
+          calculateResult(phrase);
+        }
+      });
+    }
+    
+    if (result === 2) {
+      return result;
+    }
+
+    const isReveresed = num => {
+      const string = String(num);
+
+      if (string.length > 2) {
+        return num == string.split('').reverse().join('');
+      }
+
+      return false;
+    };
+
+    const endsWithZeros = num => {
+      const string = String(num);
+      if (string.length > 2) {
+        return string[string.length - 2] == '0' && string[string.length - 1] == '0';
+      }
+      return false
+    }
+
+    const isDecrementing = num => {
+      const arr = String(num).split('').map(str => Number(str));
+      if (arr.length > 2) {
+        for (let i = 1; i < arr.length; i++) {
+          if (arr[i - 1] - 1 !== arr[i]) {
+            return false
+          }
+        }
+      } else {
+        return false;
+      }
+      return true;
+    }
+
+    const isIncrementing = num => {
+      const str = num.toString();
+
+      if (str.length > 2) {
+        for (let i = 0; i < str.length - 1; i++) {
+          const currentDigit = parseInt(str[i]);
+          const nextDigit = parseInt(str[i + 1]);
+
+          if (!(nextDigit === currentDigit + 1 || (currentDigit === 9 && nextDigit === 0))) {
+            return false;
+          }
+        }
+      } else {
+        return false;
+      }
+
+      return true;
+    }
+
     if (result != 2) {
-      result = n === range[0] ? 2 : 1;
-    }
-  };
-
-  if (awesomePhrases.length > 0) {
-    awesomePhrases.forEach(phrase => {
-      if (range.includes(phrase)) {
-        calculateResult(phrase);
-      }
-    });
-  }
-  
-  if (result === 2) {
-    return result;
-  }
-
-  const isReveresed = num => {
-    const string = String(num);
-
-    if (string.length > 1) {
-      return num == string.split('').reverse().join('');
-    }
-
-    return false;
-  };
-
-  const endsWithZeros = num => {
-    const string = String(num);
-    if (string.length > 2) {
-      return string[string.length - 2] == '0' && string[string.length - 1] == '0';
-    }
-    return false
-  }
-
-  const isDecrementing = num => {
-    const arr = String(num).split('').map(str => Number(str));
-    if (arr.length > 1) {
-      for (let i = 1; i < arr.length; i++) {
-        if (arr[i - 1] - 1 !== arr[i]) {
-          return false
+      range.forEach(num => {
+        if (isReveresed(num) || endsWithZeros(num) || isDecrementing(num) || isIncrementing(num)) {
+          calculateResult(num);
         }
-      }
-    } else {
-      return false;
+      });
     }
-    return true;
-  }
-
-  const isIncrementing = num => {
-    const str = num.toString();
-
-    if (str.length > 1) {
-      for (let i = 0; i < str.length - 1; i++) {
-        const currentDigit = parseInt(str[i]);
-        const nextDigit = parseInt(str[i + 1]);
-
-        if (!(nextDigit === currentDigit + 1 || (currentDigit === 9 && nextDigit === 0))) {
-          return false;
-        }
-      }
-    } else {
-      return false;
-    }
-
-    return true;
-  }
-
-  if (result != 2) {
-    range.forEach(num => {
-      if (isReveresed(num) || endsWithZeros(num) || isDecrementing(num) || isIncrementing(num)) {
-        calculateResult(num);
-      }
-    });
   }
 
   return result;
