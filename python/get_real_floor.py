@@ -12,6 +12,6 @@ def get_real_floor_oneline(n):
     return n if n < 1 else n - 1 if n < 13 else n - 2
 
 
-# this one is clever I guess true is equal to 1 and false equal to 0 just like in Javascript
+# this one is clever I guess true is equal to 1 and false equal to 0 just like in Javascripmt
 def clever(n):
     return n - (n > 0) - (n > 13)
