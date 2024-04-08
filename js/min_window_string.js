@@ -1,9 +1,9 @@
 // https://coderbyte.com/editor/Min%20Window%20Substring:JavaScript
 const minWindowString = strArr => {
   const containsSubstring = (str, subStr) => {
-    for (let i = 0; i < str.length; i++) {
-      if (subStr.indexOf(str[i]) !== -1) {
-        subStr = subStr.replace(str[i], '');
+    for (let char of str) {
+      if (subStr.indexOf(char) !== -1) {
+        subStr = subStr.replace(char, '');
       };
     };
     return (subStr.length === 0);
