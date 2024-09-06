@@ -10,3 +10,4 @@ const getSum = (a,b) => {
 
 console.log(getSum(-1,2));
 console.log(getSum(1,3));
+console.log(getSum(2,4)); // 9
