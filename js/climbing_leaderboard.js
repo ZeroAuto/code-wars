@@ -1,17 +1,18 @@
-const getRank = (arr, score) => {
-  let rank = 1;
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] <= score) break;
-    if (i > 0 && arr[i - 1] > arr[i]) rank++;
-  };
-  return score < arr[arr.length - 1] ? rank + 1 : rank;
-};
+// https://www.hackerrank.com/challenges/climbing-the-leaderboard/problem?isFullScreen=true
 
 const climbingLeaderboard = (ranked, player) => {
-  const result = [];
-  for (score of player) {
-    result.push(getRank(ranked, score));
-  }
+  const uniqueRanks = [...new Set(ranked)];
+    
+  let result = [];
+  let i = uniqueRanks.length - 1;
+  
+  player.forEach(score => {
+    while (i >= 0 && score >= uniqueRanks[i]) {
+      i--;
+    }
+    result.push(i + 2); // Rank is one more than the index
+  });
+  
   return result;
 };
 
