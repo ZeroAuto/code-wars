@@ -3,22 +3,24 @@
  * @return {number}
  */
 const  maxArea = height => {
-    let left = 0;
-    let right = height.length - 1;
-    let maxArea = 0;
+  let leftIdx = 0;
+  let rightIdx = height.length - 1;
+  let maxArea;
 
-    while (left < right) {
-      const area = Math.min(height[left], height[right]) * (right - left);
-      maxArea = Math.max(maxArea, area);
+  while (leftIdx < rightIdx) {
+    const width = rightIdx - leftIdx;
+    const minHeight = Math.min(height[left], height[right]);
+    const currentArea = width * minHeight;
+    maxArea = Math.max(currentArea, maxArea);
 
-      if (height[left] > height[right]) {
-        right--;
-      } else {
-        left++;
-      }
+    if (height[leftIdx] < height[rightIdx]) {
+      leftIdx++;
+    } else {
+      rightIdx--;
     }
+  };
 
-    return maxArea;
+  return maxArea;
 }
 
 console.log(maxArea([1,8,6,2,5,4,8,3,7])); // 49
