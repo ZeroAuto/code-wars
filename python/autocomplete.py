@@ -1,13 +1,7 @@
 words = ["apple", "apricot", "grape", "plum", "peach", "orange", "strawberry"]
 
 def auto_complete(str):
-  result = []
-
-  for word in words:
-    if (word[0:len(str)] == str.lower()):
-      result.append(word)
-
-  return result
+  return [word for word in words if word[0:len(str)] == str.lower()]
 
 
 print(auto_complete('ap'))
