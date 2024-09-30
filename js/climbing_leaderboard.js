@@ -17,4 +17,4 @@ const climbingLeaderboard = (ranked, player) => {
 };
 
 console.log(climbingLeaderboard([100,90,90,80], [70, 80 ,105]));
-console.log(climbingLeaderboard([100, 100, 50, 40, 40, 20, 10], [5, 25, 50, 120]));
+console.log(climbingLeaderboard([100, 100, 50, 40, 40, 20, 10], [5, 25, 50, 120]))
