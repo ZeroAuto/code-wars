@@ -1,13 +1,7 @@
 const XO = str => {
-  let x_total = 0;
-  let o_total = 0;
-
-  for (l of str) {
-    if (l.toLowerCase() === 'x') x_total ++
-    if (l.toLowerCase() === 'o') o_total ++
-  }
-
-  return x_total === o_total;
+  let x = str.match(/x/gi);
+  let o = str.match(/o/gi);
+  return (x && x.length) === (o && o.length);
 };
 
 // use array filter
