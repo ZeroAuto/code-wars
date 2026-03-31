@@ -14,15 +14,10 @@ def find_cheapest(price_array, k):
     total = sum(price_array[:k])
 
     for i in range(k-1, len(price_array)):
-        print(i)
         if i == len(price_array) - k + 1:
             break
 
         temp = sum(price_array[i:i+k])
-        # temp = 0
-        #
-        # for j in range(k):
-        #     temp = temp + price_array[i + j]
 
         if temp < total:
             start_index = i
