@@ -1,0 +1,38 @@
+require 'set'
+
+def process_transactions(transactions)
+  seen_ids = Set.new
+  result = Hash.new(0)
+
+  transactions.each do |txn|
+    # skip transaction if we have seen it already
+    if seen_ids.include? txn[:id]
+      next
+    end
+
+    txn[:type] == :credit ? result[txn[:user_id]] += txn[:amount] : result[txn[:user_id]] -= txn[:amount]
+
+    seen_ids.add(txn[:id])
+  end
+  result
+end
+#
+# Hash.new(0) removes the need for if result.has_key becuase it makes the missing key 0 by default
+# def process_transactions(transactions)
+#   # there is a uniq method already
+#   transactions.uniq { |t| t[:id] }.reduce(Hash.new(0)) do |acc, txn|
+#     amount = (txn[:type] == :credit ? txn[:amount] : -txn[:amount])
+#     acc[txn[:user_id]] += amount
+#     acc
+#   end
+# end
+
+txns = [
+  { id: 1, user_id: "A", amount: 100, type: :credit },
+  { id: 2, user_id: "B", amount: 50, type: :credit },
+  { id: 1, user_id: "A", amount: 100, type: :credit }, # Duplicate ID
+  { id: 3, user_id: "A", amount: 20, type: :debit }
+]
+
+p process_transactions(txns)
+# Expected Output: { "A" => 80, "B" => 50 }
