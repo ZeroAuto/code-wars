@@ -34,5 +34,21 @@ txns = [
   { id: 3, user_id: "A", amount: 20, type: :debit }
 ]
 
+txns2 = [
+  { id: 1, user_id: "A", amount: 100, type: :credit, timestamp: 1712520000000 },
+  { id: 2, user_id: "B", amount: 50, type: :credit, timestamp: 1712520060000 },
+  { id: 1, user_id: "A", amount: 120, type: :credit, timestamp: 1712520120000 }, # Newer duplicate ID 1
+  { id: 3, user_id: "A", amount: 20, type: :debit, timestamp: 1712520180000 },
+  { id: 4, user_id: "C", amount: 1000, type: :credit, timestamp: 1712520240000 },
+  { id: 5, user_id: "B", amount: 25, type: :debit, timestamp: 1712520300000 },
+  { id: 6, user_id: "A", amount: 50, type: :credit, timestamp: 1712520360000 },
+  { id: 4, user_id: "C", amount: 1000, type: :credit, timestamp: 1712520000000 }, # Older duplicate ID 4
+  { id: 7, user_id: "C", amount: 150, type: :debit, timestamp: 1712520480000 },
+  { id: 8, user_id: "D", amount: 300, type: :credit, timestamp: 1712520540000 }
+]
+
+def process_transactions_with_timestamps(transactions)
+end
+
 p process_transactions(txns)
 # Expected Output: { "A" => 80, "B" => 50 }
