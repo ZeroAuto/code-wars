@@ -47,8 +47,31 @@ txns2 = [
   { id: 8, user_id: "D", amount: 300, type: :credit, timestamp: 1712520540000 }
 ]
 
+def reconcile_txn(txn1, txn2)
+  total_val1 = txn1[:type] == :credit ? txn1[:amount] : -txn1[:amount]
+  total_val2 = txn2[:type] == :credit ? txn2[:amount] : -txn2[:amount]
+  txn1[:timestamp] > txn2[:timestamp] ? total_val1 - total_val2 : total_val2 - total_val1
+end
+
 def process_transactions_with_timestamps(transactions)
+  result = Hash.new(0)
+  seen_ids = {}
+
+  transactions.each do |txn|
+    id, user_id, amount, type = txn.values_at(:id, :user_id, :amount, :type)
+
+    if seen_ids.has_key? id
+      diff = reconcile_txn(txn, seen_ids[id])
+      result[user_id] += diff
+    else
+      type == :credit ? result[user_id] += amount : result[user_id] -= amount
+    end
+
+    seen_ids[id] = txn
+  end
+  result
 end
 
 p process_transactions(txns)
+p process_transactions_with_timestamps(txns2)
 # Expected Output: { "A" => 80, "B" => 50 }
