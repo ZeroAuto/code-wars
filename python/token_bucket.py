@@ -1,4 +1,5 @@
 import math
+import threading
 import time
 import unittest
 
@@ -14,6 +15,7 @@ class TokenBucketRateLimiter:
         self.refill_rate = refill_rate
         self.tokens = float(capacity)
         self.last_refill_time = time.time()
+        self._lock = threading.Lock()
 
     def _refill(self) -> None:
         """
@@ -29,13 +31,14 @@ class TokenBucketRateLimiter:
         """
         Checks if the request can be processed. Consumes tokens if true.
         """
-        self._refill()
+        with self._lock:
+            self._refill()
 
-        if self.tokens >= tokens_requested:
-            self.tokens -= tokens_requested
-            return True
+            if self.tokens >= tokens_requested:
+                self.tokens -= tokens_requested
+                return True
 
-        return False
+            return False
 
 
 class TestTokenBucketRateLimiter(unittest.TestCase):
