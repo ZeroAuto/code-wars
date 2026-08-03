@@ -67,3 +67,8 @@ def test_aggregate_stop_arm_violations_with_threshold():
 
 def test_aggregate_stop_arm_violations_empty():
     assert aggregate_stop_arm_violations([]) == {}
+
+
+test_aggregate_stop_arm_violations_basic()
+test_aggregate_stop_arm_violations_empty()
+test_aggregate_stop_arm_violations_with_threshold()
