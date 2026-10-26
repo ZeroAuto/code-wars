@@ -1,13 +1,13 @@
 function debounce(fn, delay) {
-    let timeout;
+  let timeout;
 
-    return function(...args) {
-        clearTimeout(timeout); 
+  return function (...args) {
+    clearTimeout(timeout);
 
-        timeout = setTimeout(() => {
-            fn.apply(this, args);
-        }, delay);
-    }
+    timeout = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  }
 }
 
 const log = debounce((msg) => console.log(msg), 100);
